@@ -1,4 +1,4 @@
-# Yayinda once content/ klasorlerini data.json'a birlestir.
+# Next.js + Netlify. Netlify, Next.js'i otomatik algılar ve gerekli
+# çalışma zamanını (runtime) kendi kurar.
 [build]
-  command = "node build.js"
-  publish = "."
+  command = "npm run build"

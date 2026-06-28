@@ -1,105 +1,83 @@
 # 💨 Nargile Kod Rehberi
 
-Türkiye'deki nargile markalarının ürün kodlarını ve içeriklerini tek sayfada gösteren,
-**tamamen ücretsiz** bir web sitesi. Koda, içeriğe (kavun, karpuz, sakız…) veya markaya
-göre arama yapılabilir. İçerikler bir yönetim panelinden kolayca güncellenir.
+Türkiye'deki nargile markalarının ürün kodlarını ve içeriklerini gösteren **Next.js**
+uygulaması. Koda, içeriğe (kavun, karpuz, sakız…) veya markaya göre arama yapılır.
+İçerikler, **şifreyle korunan şık bir yönetim panelinden** kolayca yönetilir.
+
+- **Ön yüz:** mobil öncelikli, animasyonlu, hızlı (Next.js 16 + React 19 + Tailwind 4)
+- **Panel:** `/admin` → şifreyle giriş → markaları/ürünleri tek tıkla ekle-sil-düzenle
+- **Veri:** veritabanı yok. Canlıda **Netlify Blobs** (ücretsiz, dahili), yerelde dosya.
+- **Maliyet:** sıfır (Netlify ücretsiz katman).
 
 ---
 
-## 📁 Dosyalar ne işe yarıyor?
+## 🔑 Ortam değişkenleri
 
-| Dosya | Açıklama |
+| Değişken | Açıklama |
 |---|---|
-| `index.html` | Sitenin kendisi. Markalar, arama, ürün listesi. |
-| `data.json` | **Tüm veriler burada.** Panel bu dosyayı düzenler. |
-| `admin/` | Yönetim paneli (Decap CMS). `site-adresin/admin/` adresinden açılır. |
-| `netlify.toml` | Netlify ayarı (dokunmana gerek yok). |
+| `ADMIN_PASSWORD` | Panele giriş şifresi. **Mutlaka belirle.** |
+| `COOKIE_SECRET` | Oturum imzası için rastgele uzun bir metin. |
 
-> İçeriği değiştirmek için **kod bilmene gerek yok** — her şey panelden yapılır.
+Yerelde bunlar `.env.local` içinde (git'e gönderilmez). Canlıda Netlify panelinden girilir.
 
 ---
 
-## 🚀 Yayına Alma (tek seferlik kurulum)
+## 💻 Yerel çalıştırma
 
-Bu adımları **bir kez** yapacaksın. Sonrasında her şey panelden yürür.
-
-### 1) GitHub'a yükle
-1. <https://github.com> adresinden ücretsiz hesap aç.
-2. Sağ üstten **New repository** → ad ver (örn. `nargile`) → **Create**.
-3. Açılan sayfada **uploading an existing file** bağlantısına tıkla, bu klasördeki
-   **tüm dosyaları** (klasörler dahil) sürükle-bırak yap → **Commit changes**.
-
-### 2) `admin/config.yml` içindeki depo adını düzelt
-`admin/config.yml` dosyasını GitHub'da aç (kalem ✏️ simgesi) ve şu satırı bul:
-
-```yaml
-backend:
-  name: git-gateway
-  branch: main
+```bash
+npm install
+npm run dev      # http://localhost:3000
 ```
 
-> Not: `git-gateway` ile depo adını yazmana gerek yok. Aşağıdaki **4. adım**
-> bu bağlantıyı otomatik kurar. (Sadece "github" yöntemini seçersen depo adı gerekir.)
-
-### 3) Netlify'a bağla (site yayına girer)
-1. <https://netlify.com> → **GitHub ile giriş yap**.
-2. **Add new site → Import an existing project → GitHub** → `nargile` deposunu seç.
-3. Ayarlara dokunmadan **Deploy**. ~1 dakikada siten yayında olur:
-   `https://rastgele-isim.netlify.app`
-4. İstersen **Site settings → Change site name** ile adresi güzelleştir
-   (örn. `nargile-kodlari.netlify.app`).
-
-### 4) Panel girişini aç (Netlify Identity)
-1. Netlify'da sitenin sayfasında: **Integrations / Identity** bölümünü bul, **Enable Identity**.
-2. **Identity → Services → Git Gateway → Enable Git Gateway**.
-3. **Identity → Registration** ayarını **Invite only** yap (başkaları kayıt olamasın).
-4. **Identity → Invite users** ile **kendi e-postanı** davet et.
-5. E-postandaki bağlantıya tıkla, bir şifre belirle.
-
-### 5) Panele gir 🎉
-`https://senin-siten.netlify.app/admin/` adresine git, e-posta + şifrenle giriş yap.
-Markaları, kodları ve içerikleri buradan ekle/düzenle/sil.
-
-> Panelde **Publish** dediğinde değişiklik otomatik kaydolur ve site ~1 dakika içinde
-> kendiliğinden güncellenir. Başka hiçbir şey yapmana gerek yok.
+- Site: `/`  ·  Panel: `/admin`  (şifre: `.env.local` içindeki `ADMIN_PASSWORD`)
+- Yerelde veri `content/data.json`'a yazılır (git'e gönderilmez). İlk açılışta
+  `content/seed-data.json` (demo veri) gösterilir.
 
 ---
 
-## 🛠️ Panel kullanımı (günlük iş)
+## 🚀 Netlify'a yayınlama
 
-1. `site/admin/` → giriş yap.
-2. **Nargile Kodları → Markalar ve Kodlar**.
-3. **Markalar** listesinden:
-   - **Yeni marka:** alttaki **Add Markalar** (Marka ekle).
-   - Marka içine girip **Ürünler → Add Ürünler** ile kod + ürün adı + içerik ekle.
-   - İçerikleri (kavun, karpuz, sakız…) tek tek satır olarak yaz.
-4. Sağ üstten **Publish → Publish now**.
+Depo zaten Netlify'a bağlı (`Deploys from GitHub`). Next.js'e geçtiğimiz için tek seferlik:
 
----
+1. **Ortam değişkenleri:** Netlify → Project configuration → **Environment variables** →
+   şunları ekle:
+   - `ADMIN_PASSWORD` = (belirlediğin güçlü şifre)
+   - `COOKIE_SECRET` = (rastgele uzun bir metin)
+2. **Build ayarı:** Netlify Next.js'i otomatik algılar. Build command `npm run build`
+   (zaten `netlify.toml`'da). Eski statik ayar kaldıysa **Build settings**'i sıfırla/güncelle.
+3. **Deploy:** `git push` → Netlify otomatik derler ve yayınlar.
+4. **Netlify Blobs:** ekstra kurulum yok; ilk yayında otomatik devreye girer.
 
-## ❓ "Identity" seçeneğini göremiyorum / giriş çalışmıyor
-
-Netlify, yeni hesaplarda bazen Identity'yi göstermez. Bu durumda **Sveltia CMS**
-(aynı ayar dosyasıyla çalışan, daha kolay girişli ücretsiz alternatif) kullan:
-
-1. `admin/index.html` içindeki script satırını şununla değiştir:
-   ```html
-   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
-   ```
-2. `admin/config.yml` içindeki `backend` bölümünü şu şekilde yap
-   (`KULLANICI/DEPO` kısmını kendi GitHub bilgilerinle değiştir):
-   ```yaml
-   backend:
-     name: github
-     repo: KULLANICI/DEPO
-     branch: main
-   ```
-3. Kaydet. Artık `/admin/` adresine girince **GitHub ile giriş** yapabilirsin —
-   ekstra kurulum gerekmez.
+> Panelde yaptığın değişiklikler **anında** canlıya yansır (Blobs'a yazılır, yeniden
+> derleme gerekmez).
 
 ---
 
-## 💰 Maliyet
+## 🛠️ Panel kullanımı
 
-Hepsi ücretsiz: **GitHub** (depo) + **Netlify** (yayın + `.netlify.app` adresi) +
-**Decap/Sveltia CMS** (panel). İstersen sonradan kendi alan adını (`.com`) bağlayabilirsin.
+1. `site/admin` → şifreyle gir.
+2. **+ Yeni Marka** ile marka ekle.
+3. Markayı aç → **+ Ürün Ekle** → kod, ürün adı, içindekiler (etiket olarak yaz).
+4. Düzenle (✎) / sil (🗑) ikonlarıyla yönet.
+5. Sağ üstte **Kaydet** → değişiklikler canlıya yansır.
+
+---
+
+## Yapı
+
+```
+app/
+  page.tsx              # ana sayfa (sunucu) -> PublicApp
+  admin/page.tsx        # panel (korumalı) -> AdminApp
+  admin/login/page.tsx  # giriş ekranı
+  api/admin/*           # login / logout / data (GET, PUT)
+components/
+  PublicApp.tsx         # arama, marka grid, ürün modalı
+  AdminApp.tsx          # CRUD panel
+lib/
+  data.ts               # Netlify Blobs + yerel dosya + tohum
+  auth.ts               # imzalı çerez oturumu
+  types.ts, display.ts
+content/seed-data.json  # demo veri
+proxy.ts                # /admin ve /api/admin koruması
+```
