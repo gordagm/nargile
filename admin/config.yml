@@ -1,0 +1,47 @@
+# ============================================================
+#  Decap CMS yapılandırması
+#  ÖNEMLI: aşağıdaki "repo" satırını kendi GitHub kullanıcı
+#  adın ve depo adınla değiştir.  Örn: repo: ahmet/nargile
+# ============================================================
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Görsel/logo yüklersen buraya kaydedilir
+media_folder: "images"
+public_folder: "/images"
+
+locale: "tr"
+
+collections:
+  - name: "veri"
+    label: "Nargile Kodları"
+    files:
+      - name: "markalar"
+        label: "Markalar ve Kodlar"
+        file: "data.json"
+        format: json
+        description: "Markaları, ürün kodlarını ve içeriklerini buradan yönetin."
+        fields:
+          - label: "Markalar"
+            name: "brands"
+            label_singular: "Marka"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Marka Adı", name: "name", widget: "string", hint: "Örn: Adalya" }
+              - label: "Ürünler"
+                name: "products"
+                label_singular: "Ürün"
+                widget: "list"
+                summary: "{{fields.code}} — {{fields.name}}"
+                fields:
+                  - { label: "Kod", name: "code", widget: "string", hint: "Örn: ADL-01" }
+                  - { label: "Ürün Adı", name: "name", widget: "string", hint: "Örn: Love 66" }
+                  - label: "İçerikler"
+                    name: "contents"
+                    label_singular: "İçerik"
+                    widget: "list"
+                    hint: "Her satıra bir içerik yazın: kavun, karpuz, sakız…"
+                    field: { label: "İçerik", name: "icerik", widget: "string" }
