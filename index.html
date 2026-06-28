@@ -5,262 +5,232 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Nargile Kod Rehberi</title>
   <meta name="description" content="Türkiye'deki nargile markalarının ürün kodları ve içerikleri tek sayfada. Koda, içeriğe veya markaya göre arayın." />
-  <meta name="theme-color" content="#13100e" />
+  <meta name="theme-color" content="#100d1a" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💨</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #13100e;
-      --surface: #1f1a16;
-      --surface-2: #271f1a;
-      --surface-3: #2f2620;
-      --line: #392f28;
-      --text: #f6efe7;
-      --muted: #ab9c8d;
-      --gold: #f0c074;
-      --gold-2: #e69a4e;
-      --gold-soft: rgba(240, 192, 116, 0.14);
-      --gold-line: rgba(240, 192, 116, 0.32);
-      --radius: 20px;
-      --radius-sm: 14px;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      --bg: #0e0b16;
+      --surface: rgba(31, 26, 40, 0.72);
+      --surface-solid: #1c1726;
+      --surface-2: rgba(43, 35, 56, 0.66);
+      --surface-3: #322a42;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-2: rgba(255, 255, 255, 0.13);
+      --text: #f6f1fb;
+      --muted: #a99fc0;
+      --gold: #f3c879;
+      --gold-2: #e6924a;
+      --gold-soft: rgba(243, 200, 121, 0.15);
+      --gold-line: rgba(243, 200, 121, 0.36);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
       --safe-b: env(safe-area-inset-bottom, 0px);
+      --safe-t: env(safe-area-inset-top, 0px);
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body { margin: 0; padding: 0; }
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg); color: var(--text);
       font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased;
     }
-    /* Arka plan sıcak ışık + duman */
-    body::before, body::after {
-      content: ""; position: fixed; z-index: 0; pointer-events: none;
-      border-radius: 50%; filter: blur(60px);
-    }
-    body::before {
-      width: 520px; height: 520px; top: -240px; left: 50%; transform: translateX(-50%);
-      background: radial-gradient(circle, rgba(230, 154, 78, 0.30), transparent 70%);
-      animation: drift1 14s ease-in-out infinite alternate;
-    }
-    body::after {
-      width: 380px; height: 380px; bottom: -160px; right: -120px;
-      background: radial-gradient(circle, rgba(120, 90, 200, 0.18), transparent 70%);
-      animation: drift2 18s ease-in-out infinite alternate;
-    }
-    @keyframes drift1 { to { transform: translateX(-50%) translateY(28px) scale(1.08); } }
-    @keyframes drift2 { to { transform: translateY(-30px) scale(1.12); } }
+    body.no-scroll { overflow: hidden; }
 
-    .wrap {
-      position: relative; z-index: 1;
-      max-width: 760px; margin: 0 auto;
-      padding: 26px 16px calc(56px + var(--safe-b));
-    }
+    /* ---- Zengin animasyonlu arka plan ---- */
+    .bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; }
+    .b1 { width: 60vw; height: 60vw; max-width: 560px; max-height: 560px; top: -18vh; left: -10vw;
+          background: radial-gradient(circle, #e6924a, transparent 68%); animation: float1 16s ease-in-out infinite alternate; }
+    .b2 { width: 65vw; height: 65vw; max-width: 600px; max-height: 600px; top: -10vh; right: -20vw;
+          background: radial-gradient(circle, #7b54e0, transparent 68%); animation: float2 19s ease-in-out infinite alternate; }
+    .b3 { width: 55vw; height: 55vw; max-width: 520px; max-height: 520px; bottom: -20vh; left: -5vw;
+          background: radial-gradient(circle, #2a8f8a, transparent 70%); opacity: .4; animation: float3 22s ease-in-out infinite alternate; }
+    .b4 { width: 50vw; height: 50vw; max-width: 480px; max-height: 480px; bottom: -18vh; right: -12vw;
+          background: radial-gradient(circle, #d6457a, transparent 70%); opacity: .38; animation: float1 24s ease-in-out infinite alternate; }
+    @keyframes float1 { to { transform: translate(40px, 40px) scale(1.12); } }
+    @keyframes float2 { to { transform: translate(-50px, 30px) scale(1.15); } }
+    @keyframes float3 { to { transform: translate(30px, -40px) scale(1.1); } }
+    /* ince grain dokusu + vignette */
+    .grain { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .05; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    .vignette { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(0,0,0,.55) 100%); }
 
-    /* HERO */
-    header { text-align: center; padding: 8px 0 20px; }
-    .logo {
-      width: 64px; height: 64px; margin: 0 auto 14px;
-      display: flex; align-items: center; justify-content: center; font-size: 34px;
-      background: linear-gradient(150deg, var(--gold), var(--gold-2));
-      border-radius: 20px;
-      box-shadow: 0 10px 26px rgba(230, 154, 78, 0.38), inset 0 1px 0 rgba(255,255,255,.4);
-    }
-    h1 {
-      font-size: 28px; font-weight: 800; margin: 0 0 6px; letter-spacing: -0.5px;
-      background: linear-gradient(180deg, #fff, #e3cdb0);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .subtitle { color: var(--muted); font-size: 14.5px; margin: 0; font-weight: 500; }
-    .meta {
-      display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
-      color: var(--gold); font-size: 12.5px; font-weight: 600;
-      background: var(--gold-soft); border: 1px solid var(--gold-line);
-      padding: 6px 14px; border-radius: 999px;
-    }
-    .meta b { color: var(--text); }
+    .wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto;
+      padding: calc(16px + var(--safe-t)) 16px calc(40px + var(--safe-b)); }
 
-    /* SEARCH */
-    .search-wrap { position: sticky; top: 8px; z-index: 30; margin: 18px 0 6px; }
+    /* ---- SEARCH (en üstte) ---- */
+    .search-wrap { position: sticky; top: calc(10px + var(--safe-t)); z-index: 30; padding-top: 6px; }
+    .brandline { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; }
+    .brandline .dot { width: 26px; height: 26px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      font-size: 15px; background: linear-gradient(150deg, var(--gold), var(--gold-2)); box-shadow: 0 4px 12px rgba(230,146,74,.4); }
+    .brandline span { font-size: 13.5px; font-weight: 700; letter-spacing: .2px; color: var(--muted); }
     .search {
-      display: flex; align-items: center; gap: 11px;
-      background: rgba(31, 26, 22, 0.86);
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-      border: 1px solid var(--line);
-      border-radius: 999px; padding: 14px 16px;
-      box-shadow: var(--shadow);
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(20, 16, 28, 0.72); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      border: 1px solid var(--line-2); border-radius: 999px; padding: 15px 18px; box-shadow: var(--shadow);
       transition: border-color .2s ease, box-shadow .2s ease;
     }
-    .search:focus-within {
-      border-color: var(--gold-line);
-      box-shadow: 0 10px 30px rgba(0,0,0,.45), 0 0 0 4px var(--gold-soft);
-    }
-    .search svg { width: 21px; height: 21px; flex: none; fill: var(--gold); opacity: .9; }
-    .search input {
-      flex: 1; border: none; background: transparent; outline: none;
-      color: var(--text); font-size: 16px; min-width: 0; font-family: inherit; font-weight: 500;
-    }
+    .search:focus-within { border-color: var(--gold-line); box-shadow: var(--shadow), 0 0 0 4px var(--gold-soft); }
+    .search svg { width: 21px; height: 21px; flex: none; fill: var(--gold); }
+    .search input { flex: 1; border: none; background: transparent; outline: none; color: var(--text);
+      font-size: 16px; min-width: 0; font-family: inherit; font-weight: 500; }
     .search input::placeholder { color: var(--muted); font-weight: 400; }
-    .search .clear {
-      border: none; background: var(--surface-3); color: var(--muted);
-      width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
-      font-size: 17px; line-height: 1; display: none; flex: none;
-    }
+    .search .clear { border: none; background: var(--surface-3); color: var(--muted); width: 28px; height: 28px;
+      border-radius: 50%; cursor: pointer; font-size: 17px; line-height: 1; display: none; flex: none; }
     .search .clear.show { display: flex; align-items: center; justify-content: center; }
+    .stat { text-align: center; color: var(--muted); font-size: 12.5px; font-weight: 600; margin: 14px 0 2px; }
+    .stat b { color: var(--gold); }
 
-    .hint { color: var(--muted); font-size: 13px; text-align: center; margin: 14px 0 18px; font-weight: 500; }
+    .hint { color: var(--muted); font-size: 13px; text-align: center; margin: 8px 0 18px; font-weight: 500; }
 
-    /* BACK BAR */
-    .topbar { display: flex; align-items: center; gap: 12px; margin: 16px 0 6px; }
-    .back {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: var(--surface-2); border: 1px solid var(--line); color: var(--text);
-      border-radius: 999px; padding: 11px 18px 11px 14px; font-size: 14.5px; font-weight: 600;
-      cursor: pointer; font-family: inherit; transition: background .15s ease;
-    }
-    .back:active { background: var(--surface-3); transform: scale(.97); }
-    .brand-hero { display: flex; align-items: center; gap: 14px; margin: 18px 2px 4px; }
-    .brand-hero .avatar { width: 52px; height: 52px; font-size: 19px; border-radius: 15px; }
-    .brand-hero h2 { font-size: 22px; margin: 0; font-weight: 700; letter-spacing: -0.3px; }
-    .brand-hero .sub { color: var(--muted); font-size: 13px; font-weight: 500; margin-top: 2px; }
+    /* ---- BACK + BRAND HERO ---- */
+    .topbar { display: flex; align-items: center; gap: 12px; margin: 16px 0 4px; }
+    .back { display: inline-flex; align-items: center; gap: 5px; background: var(--surface-2); border: 1px solid var(--line);
+      color: var(--text); border-radius: 999px; padding: 11px 18px 11px 14px; font-size: 14.5px; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: transform .12s ease; backdrop-filter: blur(6px); }
+    .back:active { transform: scale(.96); }
+    .brand-hero { display: flex; align-items: center; gap: 14px; margin: 16px 2px 2px; animation: pop .4s both; }
+    .brand-hero .avatar { width: 54px; height: 54px; font-size: 20px; border-radius: 16px; }
+    .brand-hero h2 { font-size: 23px; margin: 0; font-weight: 800; letter-spacing: -0.4px; }
+    .brand-hero .sub { color: var(--muted); font-size: 13px; font-weight: 500; margin-top: 3px; }
 
-    /* SECTION LABEL */
-    .section-title {
-      font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
-      color: var(--muted); font-weight: 700; margin: 22px 6px 12px;
-    }
+    .section-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
+      font-weight: 700; margin: 22px 6px 12px; }
 
-    /* BRAND GRID */
+    /* ---- BRAND GRID ---- */
     .grid { display: grid; gap: 13px; grid-template-columns: repeat(2, 1fr); }
-    .brand-card {
-      position: relative; overflow: hidden;
-      background: linear-gradient(160deg, var(--surface-2), var(--surface));
-      border: 1px solid var(--line);
-      border-radius: var(--radius); padding: 20px 16px 18px;
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-      text-align: center; cursor: pointer;
+    .brand-card { position: relative; overflow: hidden;
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 20px 16px 18px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;
+      cursor: pointer; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       transition: transform .14s ease, border-color .2s ease;
-      animation: pop .42s both; animation-delay: calc(var(--i, 0) * 38ms);
-    }
+      animation: pop .42s both; animation-delay: calc(var(--i, 0) * 36ms); }
     .brand-card:active { transform: scale(.96); }
     .brand-card:hover { border-color: var(--gold-line); }
-    .avatar {
-      width: 60px; height: 60px; border-radius: 17px;
-      display: flex; align-items: center; justify-content: center;
+    .avatar { width: 60px; height: 60px; border-radius: 17px; display: flex; align-items: center; justify-content: center;
       font-size: 23px; font-weight: 800; color: #fff; letter-spacing: .5px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 6px 16px rgba(0,0,0,.3);
-    }
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 6px 16px rgba(0,0,0,.35); }
     .brand-card .bname { font-size: 16.5px; font-weight: 700; letter-spacing: -0.2px; }
-    .pill {
-      font-size: 12px; color: var(--muted); font-weight: 600;
-      background: var(--surface-3); padding: 4px 11px; border-radius: 999px;
-    }
+    .pill { font-size: 12px; color: var(--muted); font-weight: 600; background: rgba(255,255,255,.06);
+      padding: 4px 12px; border-radius: 999px; }
 
-    /* PRODUCT LIST */
+    /* ---- PRODUCT LIST ---- */
     .list { display: flex; flex-direction: column; gap: 11px; }
-    .item {
-      background: linear-gradient(160deg, var(--surface-2), var(--surface));
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm); overflow: hidden;
-      animation: pop .4s both; animation-delay: calc(var(--i, 0) * 30ms);
-      transition: border-color .2s ease;
-    }
-    .item.open { border-color: var(--gold-line); }
-    .item-head { display: flex; align-items: center; gap: 13px; padding: 15px 16px; cursor: pointer; }
-    .item-head:active { background: rgba(255,255,255,.02); }
-    .code {
-      flex: none; min-width: 58px; text-align: center;
-      background: var(--gold-soft); color: var(--gold);
-      border: 1px solid var(--gold-line);
-      font-weight: 700; font-size: 13px; padding: 7px 10px; border-radius: 10px;
-      font-variant-numeric: tabular-nums; white-space: nowrap; letter-spacing: .3px;
-    }
+    .item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm);
+      display: flex; align-items: center; gap: 13px; padding: 15px 16px; cursor: pointer;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      transition: transform .12s ease, border-color .2s ease;
+      animation: pop .4s both; animation-delay: calc(var(--i, 0) * 28ms); }
+    .item:active { transform: scale(.985); border-color: var(--gold-line); }
+    .code { flex: none; min-width: 60px; text-align: center; background: var(--gold-soft); color: var(--gold);
+      border: 1px solid var(--gold-line); font-weight: 700; font-size: 13px; padding: 7px 10px; border-radius: 10px;
+      font-variant-numeric: tabular-nums; white-space: nowrap; letter-spacing: .3px; }
     .item-info { flex: 1; min-width: 0; }
-    .pname { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; line-height: 1.25; }
+    .pname { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; line-height: 1.25;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .pbrand { font-size: 12.5px; color: var(--muted); margin-top: 3px; font-weight: 500; }
-    .chev {
-      flex: none; width: 26px; height: 26px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--surface-3); color: var(--muted); font-size: 15px;
-      transition: transform .25s ease, background .2s ease, color .2s ease;
-    }
-    .item.open .chev { transform: rotate(90deg); background: var(--gold-soft); color: var(--gold); }
+    .arrow { flex: none; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,.06); color: var(--muted); font-size: 15px; }
 
-    .item-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1); }
-    .item.open .item-body { grid-template-rows: 1fr; }
-    .item-body-inner { overflow: hidden; }
-    .body-pad { padding: 4px 16px 16px; border-top: 1px solid var(--line); margin-top: 0; }
-    .body-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); font-weight: 700; margin: 13px 0 10px; }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip {
-      background: var(--surface-3); border: 1px solid var(--line);
-      color: var(--text); font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: 999px;
-    }
-
-    /* EMPTY */
+    /* ---- EMPTY ---- */
     .empty { text-align: center; color: var(--muted); padding: 56px 20px; font-size: 15px; line-height: 1.6; }
     .empty .big { font-size: 46px; margin-bottom: 12px; }
     .empty b { color: var(--text); }
 
     mark { background: linear-gradient(180deg, var(--gold), var(--gold-2)); color: #1a130c; border-radius: 4px; padding: 0 3px; font-weight: 700; }
-
-    footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; opacity: .65; font-weight: 500; }
-
+    footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 38px; opacity: .55; font-weight: 500; }
     @keyframes pop { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    @media (prefers-reduced-motion: reduce) {
-      .brand-card, .item, body::before, body::after { animation: none; }
-    }
 
-    /* Daha geniş ekran */
+    /* ---- MODAL / BOTTOM SHEET ---- */
+    .backdrop { position: fixed; inset: 0; z-index: 40; background: rgba(8, 6, 14, 0.6);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      opacity: 0; visibility: hidden; transition: opacity .28s ease, visibility .28s ease; }
+    .backdrop.show { opacity: 1; visibility: visible; }
+    .sheet { position: fixed; z-index: 50; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, #221b30, #181222);
+      border-top: 1px solid var(--line-2);
+      border-radius: 28px 28px 0 0; padding: 10px 22px calc(30px + var(--safe-b));
+      box-shadow: 0 -20px 60px rgba(0,0,0,.55);
+      transform: translateY(110%); transition: transform .36s cubic-bezier(.22, 1, .36, 1); }
+    .sheet.show { transform: translateY(0); }
+    .sheet.dragging { transition: none; }
+    .sheet-handle { width: 44px; height: 5px; border-radius: 999px; background: rgba(255,255,255,.22);
+      margin: 4px auto 18px; cursor: grab; }
+    .sheet-grab { touch-action: none; }
+    .sheet-code { display: inline-block; background: var(--gold-soft); color: var(--gold); border: 1px solid var(--gold-line);
+      font-weight: 700; font-size: 14px; padding: 8px 14px; border-radius: 12px; letter-spacing: .4px; }
+    .sheet-name { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin: 16px 0 4px; line-height: 1.2; }
+    .sheet-brand { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; font-weight: 600; }
+    .sheet-brand .av { width: 24px; height: 24px; border-radius: 8px; font-size: 11px; font-weight: 800; color: #fff;
+      display: flex; align-items: center; justify-content: center; }
+    .sheet-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: .9px; color: var(--muted);
+      font-weight: 700; margin: 24px 0 12px; }
+    .sheet .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+    .sheet .chip { background: var(--surface-3); border: 1px solid var(--line-2); color: var(--text);
+      font-size: 15px; font-weight: 600; padding: 10px 16px; border-radius: 999px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .brand-card, .item, .blob, .brand-hero { animation: none; }
+    }
     @media (min-width: 560px) {
       .grid { grid-template-columns: repeat(3, 1fr); }
-      h1 { font-size: 32px; }
+      /* Geniş ekranda ortada modal */
+      .sheet { left: 50%; right: auto; bottom: auto; top: 50%; width: 440px; max-width: calc(100vw - 32px);
+        border: 1px solid var(--line-2); border-radius: 28px; padding: 12px 26px 30px;
+        transform: translate(-50%, -42%) scale(.96); opacity: 0; }
+      .sheet.show { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      .sheet-handle { display: none; }
     }
-    @media (min-width: 720px) {
-      .grid { grid-template-columns: repeat(4, 1fr); }
-    }
+    @media (min-width: 720px) { .grid { grid-template-columns: repeat(4, 1fr); } }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">💨</div>
-      <h1>Nargile Kod Rehberi</h1>
-      <p class="subtitle">Marka, kod ve içeriklere göre arayın</p>
-      <div class="meta" id="meta" style="display:none"></div>
-    </header>
+  <div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div></div>
+  <div class="grain"></div>
+  <div class="vignette"></div>
 
+  <div class="wrap">
     <div class="search-wrap">
+      <div class="brandline"><span class="dot">💨</span><span>NARGİLE KOD REHBERİ</span></div>
       <div class="search">
         <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
         <input id="search" type="search" inputmode="search" autocomplete="off" enterkeyhint="search"
                placeholder="Kod, içerik veya marka ara…" />
         <button class="clear" id="clear" aria-label="Temizle">×</button>
       </div>
+      <p class="stat" id="stat"></p>
     </div>
 
     <div id="app"></div>
-
     <footer>💨 Nargile Kod Rehberi</footer>
   </div>
 
+  <!-- Detay modalı (alttan kayan sayfa) -->
+  <div class="backdrop" id="backdrop"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true">
+    <div class="sheet-grab"><div class="sheet-handle"></div></div>
+    <div id="sheet-body"></div>
+  </div>
+
   <script>
-    // ---- Durum ----
     var DATA = { brands: [] };
     var currentBrand = null;
     var query = "";
+    var RENDERED = [];
 
     var appEl = document.getElementById("app");
     var searchEl = document.getElementById("search");
     var clearEl = document.getElementById("clear");
-    var metaEl = document.getElementById("meta");
+    var statEl = document.getElementById("stat");
+    var backdrop = document.getElementById("backdrop");
+    var sheet = document.getElementById("sheet");
+    var sheetBody = document.getElementById("sheet-body");
 
-    // ---- Türkçe duyarlı normalize ----
     function norm(s) {
       return (s || "").toString()
         .replace(/İ/g, "i").replace(/I/g, "i").replace(/ı/g, "i")
@@ -268,16 +238,13 @@
         .replace(/ş/g, "s").replace(/ğ/g, "g").replace(/ç/g, "c")
         .replace(/ö/g, "o").replace(/ü/g, "u").trim();
     }
-
     function brandColors(name) {
-      var h = 0;
-      for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 360;
-      return "linear-gradient(140deg, hsl(" + h + ",68%,54%), hsl(" + ((h + 38) % 360) + ",72%,42%))";
+      var h = 0; for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 360;
+      return "linear-gradient(140deg, hsl(" + h + ",68%,55%), hsl(" + ((h + 38) % 360) + ",72%,43%))";
     }
     function initials(name) {
       var p = name.trim().split(/\s+/);
-      if (p.length === 1) return p[0].slice(0, 2).toUpperCase();
-      return (p[0][0] + p[1][0]).toUpperCase();
+      return p.length === 1 ? p[0].slice(0, 2).toUpperCase() : (p[0][0] + p[1][0]).toUpperCase();
     }
     function esc(s) {
       return (s || "").replace(/[&<>"']/g, function (c) {
@@ -285,10 +252,8 @@
       });
     }
     function hl(text) {
-      var safe = esc(text);
-      if (!query) return safe;
-      var nq = norm(query), nt = norm(text);
-      var idx = nt.indexOf(nq);
+      var safe = esc(text); if (!query) return safe;
+      var nq = norm(query), nt = norm(text), idx = nt.indexOf(nq);
       if (idx === -1) return safe;
       return esc(text.slice(0, idx)) + "<mark>" + esc(text.slice(idx, idx + nq.length)) + "</mark>" + esc(text.slice(idx + nq.length));
     }
@@ -303,33 +268,26 @@
       return false;
     }
 
-    // ---- Render ----
-    function render() { return currentBrand ? renderBrand() : renderHome(); }
+    function render() { closeSheet(true); return currentBrand ? renderBrand() : renderHome(); }
 
-    function productItem(p, brandName, showBrand, i) {
-      var contents = (p.contents || []).map(function (c) {
-        return '<span class="chip">' + hl(c) + "</span>";
-      }).join("");
-      return (
-        '<div class="item" style="--i:' + i + '">' +
-          '<div class="item-head" data-toggle="1">' +
-            '<span class="code">' + hl(p.code || "—") + "</span>" +
+    function listHtml(rows, showBrand) {
+      RENDERED = rows;
+      return '<div class="list">' + rows.map(function (r, i) {
+        return (
+          '<div class="item" style="--i:' + i + '" data-pid="' + i + '">' +
+            '<span class="code">' + hl(r.p.code || "—") + "</span>" +
             '<div class="item-info">' +
-              '<div class="pname">' + hl(p.name || "İsimsiz") + "</div>" +
-              (showBrand ? '<div class="pbrand">' + hl(brandName) + "</div>" : "") +
-            "</div>" +
-            '<span class="chev">›</span>' +
-          "</div>" +
-          '<div class="item-body"><div class="item-body-inner"><div class="body-pad">' +
-            '<div class="body-label">İçindekiler</div>' +
-            '<div class="chips">' + (contents || '<span class="chip">Belirtilmemiş</span>') + "</div>" +
-          "</div></div></div>" +
-        "</div>"
-      );
+              '<div class="pname">' + hl(r.p.name || "İsimsiz") + "</div>" +
+              (showBrand ? '<div class="pbrand">' + hl(r.brand) + "</div>" : "") +
+            "</div><span class='arrow'>›</span>" +
+          "</div>"
+        );
+      }).join("") + "</div>";
     }
 
     function renderHome() {
       if (!query) {
+        statEl.style.display = "";
         var cards = DATA.brands.map(function (b, i) {
           return (
             '<div class="brand-card" style="--i:' + i + '" data-brand="' + esc(b.name) + '">' +
@@ -339,99 +297,113 @@
             "</div>"
           );
         }).join("");
-        appEl.innerHTML =
-          '<p class="hint">Bir markaya dokun, kodlarını gör 👇</p>' +
-          '<div class="grid">' + cards + "</div>";
+        appEl.innerHTML = '<p class="hint">Bir markaya dokun, kodlarını gör 👇</p><div class="grid">' + cards + "</div>";
         return;
       }
-
-      var results = [];
+      statEl.style.display = "none";
+      var rows = [];
       DATA.brands.forEach(function (b) {
-        (b.products || []).forEach(function (p) {
-          if (productMatches(p, b.name)) results.push({ p: p, brand: b.name });
-        });
+        (b.products || []).forEach(function (p) { if (productMatches(p, b.name)) rows.push({ p: p, brand: b.name }); });
       });
-      if (results.length === 0) {
-        appEl.innerHTML =
-          '<div class="empty"><div class="big">🔍</div><b>“' + esc(query) +
-          "”</b> için sonuç yok.<br>Farklı bir kod, içerik ya da marka dene.</div>";
+      if (!rows.length) {
+        appEl.innerHTML = '<div class="empty"><div class="big">🔍</div><b>“' + esc(query) + "”</b> için sonuç yok.<br>Farklı bir kod, içerik ya da marka dene.</div>";
         return;
       }
-      var list = results.map(function (r, i) { return productItem(r.p, r.brand, true, i); }).join("");
-      appEl.innerHTML =
-        '<div class="section-title">' + results.length + " sonuç</div>" +
-        '<div class="list">' + list + "</div>";
+      appEl.innerHTML = '<div class="section-title">' + rows.length + " sonuç</div>" + listHtml(rows, true);
     }
 
     function renderBrand() {
+      statEl.style.display = "none";
       var b = DATA.brands.find(function (x) { return x.name === currentBrand; });
       if (!b) { currentBrand = null; return renderHome(); }
-      var prods = (b.products || []).filter(function (p) { return productMatches(p, b.name); });
-      var listHtml = prods.length
-        ? '<div class="list">' + prods.map(function (p, i) { return productItem(p, b.name, false, i); }).join("") + "</div>"
-        : '<div class="empty"><div class="big">🔍</div>Bu markada eşleşen ürün yok.</div>';
+      var rows = (b.products || []).filter(function (p) { return productMatches(p, b.name); }).map(function (p) { return { p: p, brand: b.name }; });
+      var body = rows.length ? listHtml(rows, false) : '<div class="empty"><div class="big">🔍</div>Bu markada eşleşen ürün yok.</div>';
       appEl.innerHTML =
         '<div class="topbar"><button class="back" id="back">‹ Markalar</button></div>' +
-        '<div class="brand-hero">' +
-          '<div class="avatar" style="background:' + brandColors(b.name) + '">' + esc(initials(b.name)) + "</div>" +
-          "<div><h2>" + esc(b.name) + "</h2>" +
-          '<div class="sub">' + (b.products ? b.products.length : 0) + " ürün kodu</div></div>" +
-        "</div>" +
-        '<div class="section-title">' + prods.length + (query ? " sonuç" : " ürün") + "</div>" +
-        listHtml;
+        '<div class="brand-hero"><div class="avatar" style="background:' + brandColors(b.name) + '">' + esc(initials(b.name)) + "</div>" +
+        "<div><h2>" + esc(b.name) + "</h2><div class='sub'>" + (b.products ? b.products.length : 0) + " ürün kodu</div></div></div>" +
+        '<div class="section-title">' + rows.length + (query ? " sonuç" : " ürün") + "</div>" + body;
     }
+
+    // ---- Modal ----
+    function openSheet(r) {
+      var contents = (r.p.contents || []).map(function (c) { return '<span class="chip">' + esc(c) + "</span>"; }).join("");
+      sheetBody.innerHTML =
+        '<span class="sheet-code">' + esc(r.p.code || "—") + "</span>" +
+        '<div class="sheet-name">' + esc(r.p.name || "İsimsiz") + "</div>" +
+        '<div class="sheet-brand"><span class="av" style="background:' + brandColors(r.brand) + '">' + esc(initials(r.brand)) + "</span>" + esc(r.brand) + "</div>" +
+        '<div class="sheet-label">İçindekiler</div>' +
+        '<div class="chips">' + (contents || '<span class="chip">Belirtilmemiş</span>') + "</div>";
+      backdrop.classList.add("show");
+      sheet.classList.add("show");
+      document.body.classList.add("no-scroll");
+    }
+    function closeSheet(instant) {
+      if (instant) { sheet.style.transform = ""; }
+      backdrop.classList.remove("show");
+      sheet.classList.remove("show");
+      sheet.style.transform = "";
+      document.body.classList.remove("no-scroll");
+    }
+    backdrop.addEventListener("click", function () { closeSheet(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeSheet(); });
+
+    // Aşağı kaydırarak kapatma (mobil)
+    (function () {
+      var grab = sheet.querySelector(".sheet-grab");
+      var startY = 0, dy = 0, dragging = false;
+      grab.addEventListener("touchstart", function (e) {
+        if (window.innerWidth >= 560) return;
+        startY = e.touches[0].clientY; dragging = true; dy = 0; sheet.classList.add("dragging");
+      }, { passive: true });
+      grab.addEventListener("touchmove", function (e) {
+        if (!dragging) return;
+        dy = e.touches[0].clientY - startY;
+        if (dy < 0) dy = 0;
+        sheet.style.transform = "translateY(" + dy + "px)";
+      }, { passive: true });
+      grab.addEventListener("touchend", function () {
+        if (!dragging) return;
+        dragging = false; sheet.classList.remove("dragging");
+        if (dy > 110) { closeSheet(); } else { sheet.style.transform = ""; }
+      });
+    })();
 
     // ---- Olaylar ----
     appEl.addEventListener("click", function (e) {
       var card = e.target.closest("[data-brand]");
-      if (card) {
-        currentBrand = card.getAttribute("data-brand");
-        query = ""; searchEl.value = ""; clearEl.classList.remove("show");
-        metaEl.style.display = "none";
-        window.scrollTo({ top: 0 }); render(); return;
-      }
-      if (e.target.closest("#back")) {
-        currentBrand = null; query = ""; searchEl.value = ""; clearEl.classList.remove("show");
-        updateMeta(); window.scrollTo({ top: 0 }); render(); return;
-      }
-      var head = e.target.closest("[data-toggle]");
-      if (head) head.closest(".item").classList.toggle("open");
+      if (card) { currentBrand = card.getAttribute("data-brand"); query = ""; searchEl.value = ""; clearEl.classList.remove("show");
+        window.scrollTo({ top: 0 }); render(); return; }
+      if (e.target.closest("#back")) { currentBrand = null; query = ""; searchEl.value = ""; clearEl.classList.remove("show");
+        window.scrollTo({ top: 0 }); render(); return; }
+      var item = e.target.closest("[data-pid]");
+      if (item) { var r = RENDERED[+item.getAttribute("data-pid")]; if (r) openSheet(r); }
     });
-
     searchEl.addEventListener("input", function () {
-      query = searchEl.value;
-      clearEl.classList.toggle("show", query.length > 0);
-      render();
+      query = searchEl.value; clearEl.classList.toggle("show", query.length > 0); render();
     });
     clearEl.addEventListener("click", function () {
-      query = ""; searchEl.value = ""; clearEl.classList.remove("show");
-      searchEl.focus(); render();
+      query = ""; searchEl.value = ""; clearEl.classList.remove("show"); searchEl.focus(); render();
     });
 
-    function updateMeta() {
-      if (currentBrand) { metaEl.style.display = "none"; return; }
+    function updateStat() {
       var bc = DATA.brands.length;
       var pc = DATA.brands.reduce(function (s, b) { return s + (b.products ? b.products.length : 0); }, 0);
-      if (bc) {
-        metaEl.innerHTML = "<b>" + bc + "</b>&nbsp;marka &nbsp;·&nbsp; <b>" + pc + "</b>&nbsp;ürün kodu";
-        metaEl.style.display = "inline-flex";
-      }
+      statEl.innerHTML = "<b>" + bc + "</b> marka · <b>" + pc + "</b> ürün kodu";
     }
 
-    // Panel giriş yönlendirmesi (admin için, görünür buton yok)
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", function (user) {
         if (!user) window.netlifyIdentity.on("login", function () { document.location.href = "/admin/"; });
       });
     }
 
-    // ---- Veri yükle ----
     fetch("data.json?v=" + Date.now())
       .then(function (r) { return r.json(); })
       .then(function (d) {
         DATA = d && d.brands ? d : { brands: [] };
         DATA.brands.sort(function (a, b) { return a.name.localeCompare(b.name, "tr"); });
-        updateMeta(); render();
+        updateStat(); render();
       })
       .catch(function () {
         appEl.innerHTML = '<div class="empty"><div class="big">⚠️</div>Veriler yüklenemedi.<br>Lütfen sayfayı yenileyin.</div>';
