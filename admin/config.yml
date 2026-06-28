@@ -1,11 +1,11 @@
 # ============================================================
-#  Decap CMS yapılandırması
-#  ÖNEMLI: aşağıdaki "repo" satırını kendi GitHub kullanıcı
-#  adın ve depo adınla değiştir.  Örn: repo: ahmet/nargile
+#  Decap CMS yapılandırması — GitHub girişi (Git Gateway YOK)
+#  Giriş: /admin/ -> "Login with GitHub"
 # ============================================================
 
 backend:
-  name: git-gateway
+  name: github
+  repo: gordagm/nargile
   branch: main
 
 # Görsel/logo yüklersen buraya kaydedilir

@@ -392,12 +392,6 @@
       statEl.innerHTML = "<b>" + bc + "</b> marka · <b>" + pc + "</b> ürün kodu";
     }
 
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", function (user) {
-        if (!user) window.netlifyIdentity.on("login", function () { document.location.href = "/admin/"; });
-      });
-    }
-
     fetch("data.json?v=" + Date.now())
       .then(function (r) { return r.json(); })
       .then(function (d) {
@@ -409,6 +403,5 @@
         appEl.innerHTML = '<div class="empty"><div class="big">⚠️</div>Veriler yüklenemedi.<br>Lütfen sayfayı yenileyin.</div>';
       });
   </script>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 </body>
 </html>
