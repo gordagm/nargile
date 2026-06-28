@@ -2,143 +2,228 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Nargile Kod Rehberi</title>
-  <meta name="description" content="Türkiye'deki nargile markalarının ürün kodları ve içerikleri tek sayfada. Koda, içeriğe veya markaya göre arama yapın." />
+  <meta name="description" content="Türkiye'deki nargile markalarının ürün kodları ve içerikleri tek sayfada. Koda, içeriğe veya markaya göre arayın." />
+  <meta name="theme-color" content="#13100e" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💨</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0f1419;
-      --bg-soft: #171f29;
-      --card: #1c2733;
-      --card-hover: #243240;
-      --line: #2c3a48;
-      --text: #eef3f8;
-      --muted: #9fb0c0;
-      --accent: #36c6a0;
-      --accent-soft: rgba(54, 198, 160, 0.14);
-      --chip: #28394a;
-      --radius: 16px;
-      --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+      --bg: #13100e;
+      --surface: #1f1a16;
+      --surface-2: #271f1a;
+      --surface-3: #2f2620;
+      --line: #392f28;
+      --text: #f6efe7;
+      --muted: #ab9c8d;
+      --gold: #f0c074;
+      --gold-2: #e69a4e;
+      --gold-soft: rgba(240, 192, 116, 0.14);
+      --gold-line: rgba(240, 192, 116, 0.32);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      --safe-b: env(safe-area-inset-bottom, 0px);
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body { margin: 0; padding: 0; }
     body {
-      background: radial-gradient(1200px 600px at 50% -200px, #1a2733, var(--bg)) fixed;
+      background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 18px 16px 64px; }
-
-    header { text-align: center; padding: 14px 0 4px; }
-    .logo { font-size: 40px; line-height: 1; }
-    h1 { font-size: 26px; margin: 6px 0 2px; letter-spacing: -0.3px; }
-    .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
-
-    /* Search */
-    .search {
-      position: sticky; top: 10px; z-index: 20;
-      display: flex; align-items: center; gap: 10px;
-      background: var(--bg-soft);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 12px 16px;
-      box-shadow: var(--shadow);
-      margin-bottom: 8px;
+    /* Arka plan sıcak ışık + duman */
+    body::before, body::after {
+      content: ""; position: fixed; z-index: 0; pointer-events: none;
+      border-radius: 50%; filter: blur(60px);
     }
-    .search svg { width: 20px; height: 20px; flex: none; fill: var(--muted); }
+    body::before {
+      width: 520px; height: 520px; top: -240px; left: 50%; transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(230, 154, 78, 0.30), transparent 70%);
+      animation: drift1 14s ease-in-out infinite alternate;
+    }
+    body::after {
+      width: 380px; height: 380px; bottom: -160px; right: -120px;
+      background: radial-gradient(circle, rgba(120, 90, 200, 0.18), transparent 70%);
+      animation: drift2 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift1 { to { transform: translateX(-50%) translateY(28px) scale(1.08); } }
+    @keyframes drift2 { to { transform: translateY(-30px) scale(1.12); } }
+
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 760px; margin: 0 auto;
+      padding: 26px 16px calc(56px + var(--safe-b));
+    }
+
+    /* HERO */
+    header { text-align: center; padding: 8px 0 20px; }
+    .logo {
+      width: 64px; height: 64px; margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center; font-size: 34px;
+      background: linear-gradient(150deg, var(--gold), var(--gold-2));
+      border-radius: 20px;
+      box-shadow: 0 10px 26px rgba(230, 154, 78, 0.38), inset 0 1px 0 rgba(255,255,255,.4);
+    }
+    h1 {
+      font-size: 28px; font-weight: 800; margin: 0 0 6px; letter-spacing: -0.5px;
+      background: linear-gradient(180deg, #fff, #e3cdb0);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .subtitle { color: var(--muted); font-size: 14.5px; margin: 0; font-weight: 500; }
+    .meta {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+      color: var(--gold); font-size: 12.5px; font-weight: 600;
+      background: var(--gold-soft); border: 1px solid var(--gold-line);
+      padding: 6px 14px; border-radius: 999px;
+    }
+    .meta b { color: var(--text); }
+
+    /* SEARCH */
+    .search-wrap { position: sticky; top: 8px; z-index: 30; margin: 18px 0 6px; }
+    .search {
+      display: flex; align-items: center; gap: 11px;
+      background: rgba(31, 26, 22, 0.86);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--line);
+      border-radius: 999px; padding: 14px 16px;
+      box-shadow: var(--shadow);
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .search:focus-within {
+      border-color: var(--gold-line);
+      box-shadow: 0 10px 30px rgba(0,0,0,.45), 0 0 0 4px var(--gold-soft);
+    }
+    .search svg { width: 21px; height: 21px; flex: none; fill: var(--gold); opacity: .9; }
     .search input {
       flex: 1; border: none; background: transparent; outline: none;
-      color: var(--text); font-size: 16px; min-width: 0;
+      color: var(--text); font-size: 16px; min-width: 0; font-family: inherit; font-weight: 500;
     }
-    .search input::placeholder { color: var(--muted); }
+    .search input::placeholder { color: var(--muted); font-weight: 400; }
     .search .clear {
-      border: none; background: var(--chip); color: var(--muted);
-      width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
-      font-size: 16px; line-height: 1; display: none; flex: none;
+      border: none; background: var(--surface-3); color: var(--muted);
+      width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+      font-size: 17px; line-height: 1; display: none; flex: none;
     }
-    .search .clear.show { display: block; }
+    .search .clear.show { display: flex; align-items: center; justify-content: center; }
 
-    .hint { color: var(--muted); font-size: 12.5px; text-align: center; margin: 4px 0 16px; }
+    .hint { color: var(--muted); font-size: 13px; text-align: center; margin: 14px 0 18px; font-weight: 500; }
 
-    /* Back bar */
-    .topbar { display: flex; align-items: center; gap: 12px; margin: 4px 0 14px; }
+    /* BACK BAR */
+    .topbar { display: flex; align-items: center; gap: 12px; margin: 16px 0 6px; }
     .back {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--card); border: 1px solid var(--line); color: var(--text);
-      border-radius: 999px; padding: 9px 16px 9px 12px; font-size: 15px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--surface-2); border: 1px solid var(--line); color: var(--text);
+      border-radius: 999px; padding: 11px 18px 11px 14px; font-size: 14.5px; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: background .15s ease;
     }
-    .back:active { background: var(--card-hover); }
-    .topbar h2 { font-size: 20px; margin: 0; }
+    .back:active { background: var(--surface-3); transform: scale(.97); }
+    .brand-hero { display: flex; align-items: center; gap: 14px; margin: 18px 2px 4px; }
+    .brand-hero .avatar { width: 52px; height: 52px; font-size: 19px; border-radius: 15px; }
+    .brand-hero h2 { font-size: 22px; margin: 0; font-weight: 700; letter-spacing: -0.3px; }
+    .brand-hero .sub { color: var(--muted); font-size: 13px; font-weight: 500; margin-top: 2px; }
 
-    /* Brand grid */
-    .grid {
-      display: grid; gap: 12px;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-    .brand-card {
-      background: var(--card); border: 1px solid var(--line);
-      border-radius: var(--radius); padding: 18px 14px; cursor: pointer;
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      text-align: center; transition: transform .12s ease, background .12s ease;
-    }
-    .brand-card:active { transform: scale(.97); background: var(--card-hover); }
-    .avatar {
-      width: 58px; height: 58px; border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px; font-weight: 700; color: #fff;
-    }
-    .brand-card .bname { font-size: 16px; font-weight: 600; }
-    .brand-card .bcount { font-size: 12.5px; color: var(--muted); }
-
-    /* Section title */
+    /* SECTION LABEL */
     .section-title {
-      font-size: 13px; text-transform: uppercase; letter-spacing: .6px;
-      color: var(--muted); margin: 22px 4px 10px;
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--muted); font-weight: 700; margin: 22px 6px 12px;
     }
 
-    /* Product list */
-    .list { display: flex; flex-direction: column; gap: 10px; }
+    /* BRAND GRID */
+    .grid { display: grid; gap: 13px; grid-template-columns: repeat(2, 1fr); }
+    .brand-card {
+      position: relative; overflow: hidden;
+      background: linear-gradient(160deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 20px 16px 18px;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      text-align: center; cursor: pointer;
+      transition: transform .14s ease, border-color .2s ease;
+      animation: pop .42s both; animation-delay: calc(var(--i, 0) * 38ms);
+    }
+    .brand-card:active { transform: scale(.96); }
+    .brand-card:hover { border-color: var(--gold-line); }
+    .avatar {
+      width: 60px; height: 60px; border-radius: 17px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 23px; font-weight: 800; color: #fff; letter-spacing: .5px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 6px 16px rgba(0,0,0,.3);
+    }
+    .brand-card .bname { font-size: 16.5px; font-weight: 700; letter-spacing: -0.2px; }
+    .pill {
+      font-size: 12px; color: var(--muted); font-weight: 600;
+      background: var(--surface-3); padding: 4px 11px; border-radius: 999px;
+    }
+
+    /* PRODUCT LIST */
+    .list { display: flex; flex-direction: column; gap: 11px; }
     .item {
-      background: var(--card); border: 1px solid var(--line);
-      border-radius: 14px; overflow: hidden;
+      background: linear-gradient(160deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm); overflow: hidden;
+      animation: pop .4s both; animation-delay: calc(var(--i, 0) * 30ms);
+      transition: border-color .2s ease;
     }
-    .item-head {
-      display: flex; align-items: center; gap: 12px; padding: 14px;
-      cursor: pointer;
-    }
-    .item-head:active { background: var(--card-hover); }
+    .item.open { border-color: var(--gold-line); }
+    .item-head { display: flex; align-items: center; gap: 13px; padding: 15px 16px; cursor: pointer; }
+    .item-head:active { background: rgba(255,255,255,.02); }
     .code {
-      flex: none; background: var(--accent-soft); color: var(--accent);
-      border: 1px solid rgba(54,198,160,.3);
-      font-weight: 700; font-size: 13.5px; padding: 6px 10px; border-radius: 8px;
-      font-variant-numeric: tabular-nums; white-space: nowrap;
+      flex: none; min-width: 58px; text-align: center;
+      background: var(--gold-soft); color: var(--gold);
+      border: 1px solid var(--gold-line);
+      font-weight: 700; font-size: 13px; padding: 7px 10px; border-radius: 10px;
+      font-variant-numeric: tabular-nums; white-space: nowrap; letter-spacing: .3px;
     }
     .item-info { flex: 1; min-width: 0; }
-    .pname { font-size: 16px; font-weight: 600; }
-    .pbrand { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
-    .chev { flex: none; color: var(--muted); transition: transform .18s ease; font-size: 18px; }
-    .item.open .chev { transform: rotate(90deg); }
-    .item-body {
-      display: none; padding: 0 14px 14px 14px; border-top: 1px solid var(--line);
+    .pname { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; line-height: 1.25; }
+    .pbrand { font-size: 12.5px; color: var(--muted); margin-top: 3px; font-weight: 500; }
+    .chev {
+      flex: none; width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--surface-3); color: var(--muted); font-size: 15px;
+      transition: transform .25s ease, background .2s ease, color .2s ease;
     }
-    .item.open .item-body { display: block; }
-    .body-label { font-size: 12.5px; color: var(--muted); margin: 12px 0 8px; }
+    .item.open .chev { transform: rotate(90deg); background: var(--gold-soft); color: var(--gold); }
+
+    .item-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1); }
+    .item.open .item-body { grid-template-rows: 1fr; }
+    .item-body-inner { overflow: hidden; }
+    .body-pad { padding: 4px 16px 16px; border-top: 1px solid var(--line); margin-top: 0; }
+    .body-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); font-weight: 700; margin: 13px 0 10px; }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
-      background: var(--chip); border: 1px solid var(--line);
-      color: var(--text); font-size: 14px; padding: 7px 12px; border-radius: 999px;
+      background: var(--surface-3); border: 1px solid var(--line);
+      color: var(--text); font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: 999px;
     }
 
-    .empty { text-align: center; color: var(--muted); padding: 48px 16px; }
-    .empty .big { font-size: 40px; margin-bottom: 10px; }
+    /* EMPTY */
+    .empty { text-align: center; color: var(--muted); padding: 56px 20px; font-size: 15px; line-height: 1.6; }
+    .empty .big { font-size: 46px; margin-bottom: 12px; }
+    .empty b { color: var(--text); }
 
-    mark { background: var(--accent); color: #0f1419; border-radius: 3px; padding: 0 2px; }
+    mark { background: linear-gradient(180deg, var(--gold), var(--gold-2)); color: #1a130c; border-radius: 4px; padding: 0 3px; font-weight: 700; }
 
-    footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; }
-    footer a { color: var(--muted); }
+    footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; opacity: .65; font-weight: 500; }
+
+    @keyframes pop { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      .brand-card, .item, body::before, body::after { animation: none; }
+    }
+
+    /* Daha geniş ekran */
+    @media (min-width: 560px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+      h1 { font-size: 32px; }
+    }
+    @media (min-width: 720px) {
+      .grid { grid-template-columns: repeat(4, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -147,72 +232,66 @@
       <div class="logo">💨</div>
       <h1>Nargile Kod Rehberi</h1>
       <p class="subtitle">Marka, kod ve içeriklere göre arayın</p>
+      <div class="meta" id="meta" style="display:none"></div>
     </header>
 
-    <div class="search">
-      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
-      <input id="search" type="search" inputmode="search" autocomplete="off"
-             placeholder="Kod, içerik (kavun, sakız…) veya marka ara" />
-      <button class="clear" id="clear" aria-label="Temizle">×</button>
+    <div class="search-wrap">
+      <div class="search">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+        <input id="search" type="search" inputmode="search" autocomplete="off" enterkeyhint="search"
+               placeholder="Kod, içerik veya marka ara…" />
+        <button class="clear" id="clear" aria-label="Temizle">×</button>
+      </div>
     </div>
 
     <div id="app"></div>
 
-    <footer>
-      Nargile Kod Rehberi · <a href="/admin/" target="_blank" rel="noopener">Yönetim Paneli</a>
-    </footer>
+    <footer>💨 Nargile Kod Rehberi</footer>
   </div>
 
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     // ---- Durum ----
     var DATA = { brands: [] };
-    var currentBrand = null;       // null = ana sayfa, aksi halde marka adı
+    var currentBrand = null;
     var query = "";
 
     var appEl = document.getElementById("app");
     var searchEl = document.getElementById("search");
     var clearEl = document.getElementById("clear");
+    var metaEl = document.getElementById("meta");
 
-    // ---- Türkçe duyarlı normalize (arama için) ----
+    // ---- Türkçe duyarlı normalize ----
     function norm(s) {
-      return (s || "")
-        .toString()
+      return (s || "").toString()
         .replace(/İ/g, "i").replace(/I/g, "i").replace(/ı/g, "i")
         .toLocaleLowerCase("tr")
         .replace(/ş/g, "s").replace(/ğ/g, "g").replace(/ç/g, "c")
-        .replace(/ö/g, "o").replace(/ü/g, "u")
-        .trim();
+        .replace(/ö/g, "o").replace(/ü/g, "u").trim();
     }
 
-    function brandColor(name) {
+    function brandColors(name) {
       var h = 0;
       for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 360;
-      return "hsl(" + h + ", 55%, 45%)";
+      return "linear-gradient(140deg, hsl(" + h + ",68%,54%), hsl(" + ((h + 38) % 360) + ",72%,42%))";
     }
     function initials(name) {
-      var parts = name.trim().split(/\s+/);
-      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-      return (parts[0][0] + parts[1][0]).toUpperCase();
+      var p = name.trim().split(/\s+/);
+      if (p.length === 1) return p[0].slice(0, 2).toUpperCase();
+      return (p[0][0] + p[1][0]).toUpperCase();
     }
-
     function esc(s) {
       return (s || "").replace(/[&<>"']/g, function (c) {
         return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
       });
     }
-    // Eşleşen kısmı vurgula
     function hl(text) {
       var safe = esc(text);
       if (!query) return safe;
-      var nq = norm(query);
-      var nt = norm(text);
+      var nq = norm(query), nt = norm(text);
       var idx = nt.indexOf(nq);
       if (idx === -1) return safe;
-      // norm uzunluğu orijinalle birebir aynı (1-1 harf dönüşümü) olduğundan indeks güvenli
       return esc(text.slice(0, idx)) + "<mark>" + esc(text.slice(idx, idx + nq.length)) + "</mark>" + esc(text.slice(idx + nq.length));
     }
-
     function productMatches(p, brandName) {
       if (!query) return true;
       var nq = norm(query);
@@ -225,17 +304,14 @@
     }
 
     // ---- Render ----
-    function render() {
-      if (currentBrand) return renderBrand();
-      return renderHome();
-    }
+    function render() { return currentBrand ? renderBrand() : renderHome(); }
 
-    function productItem(p, brandName, showBrand) {
+    function productItem(p, brandName, showBrand, i) {
       var contents = (p.contents || []).map(function (c) {
         return '<span class="chip">' + hl(c) + "</span>";
       }).join("");
       return (
-        '<div class="item">' +
+        '<div class="item" style="--i:' + i + '">' +
           '<div class="item-head" data-toggle="1">' +
             '<span class="code">' + hl(p.code || "—") + "</span>" +
             '<div class="item-info">' +
@@ -244,48 +320,44 @@
             "</div>" +
             '<span class="chev">›</span>' +
           "</div>" +
-          '<div class="item-body">' +
-            '<div class="body-label">İçerik</div>' +
+          '<div class="item-body"><div class="item-body-inner"><div class="body-pad">' +
+            '<div class="body-label">İçindekiler</div>' +
             '<div class="chips">' + (contents || '<span class="chip">Belirtilmemiş</span>') + "</div>" +
-          "</div>" +
+          "</div></div></div>" +
         "</div>"
       );
     }
 
     function renderHome() {
-      // Arama yoksa: marka gridi
       if (!query) {
-        var cards = DATA.brands.map(function (b) {
+        var cards = DATA.brands.map(function (b, i) {
           return (
-            '<div class="brand-card" data-brand="' + esc(b.name) + '">' +
-              '<div class="avatar" style="background:' + brandColor(b.name) + '">' + esc(initials(b.name)) + "</div>" +
+            '<div class="brand-card" style="--i:' + i + '" data-brand="' + esc(b.name) + '">' +
+              '<div class="avatar" style="background:' + brandColors(b.name) + '">' + esc(initials(b.name)) + "</div>" +
               '<div class="bname">' + esc(b.name) + "</div>" +
-              '<div class="bcount">' + (b.products ? b.products.length : 0) + " ürün</div>" +
+              '<div class="pill">' + (b.products ? b.products.length : 0) + " ürün</div>" +
             "</div>"
           );
         }).join("");
         appEl.innerHTML =
-          '<p class="hint">Bir markaya dokunarak kodlarını görün</p>' +
+          '<p class="hint">Bir markaya dokun, kodlarını gör 👇</p>' +
           '<div class="grid">' + cards + "</div>";
         return;
       }
 
-      // Arama varsa: tüm markalardaki eşleşen ürünleri düz liste olarak göster
       var results = [];
       DATA.brands.forEach(function (b) {
         (b.products || []).forEach(function (p) {
           if (productMatches(p, b.name)) results.push({ p: p, brand: b.name });
         });
       });
-
       if (results.length === 0) {
         appEl.innerHTML =
-          '<div class="empty"><div class="big">🔍</div>“' + esc(query) +
-          "” için sonuç bulunamadı.<br>Farklı bir kod, içerik veya marka deneyin.</div>";
+          '<div class="empty"><div class="big">🔍</div><b>“' + esc(query) +
+          "”</b> için sonuç yok.<br>Farklı bir kod, içerik ya da marka dene.</div>";
         return;
       }
-
-      var list = results.map(function (r) { return productItem(r.p, r.brand, true); }).join("");
+      var list = results.map(function (r, i) { return productItem(r.p, r.brand, true, i); }).join("");
       appEl.innerHTML =
         '<div class="section-title">' + results.length + " sonuç</div>" +
         '<div class="list">' + list + "</div>";
@@ -294,18 +366,18 @@
     function renderBrand() {
       var b = DATA.brands.find(function (x) { return x.name === currentBrand; });
       if (!b) { currentBrand = null; return renderHome(); }
-
       var prods = (b.products || []).filter(function (p) { return productMatches(p, b.name); });
       var listHtml = prods.length
-        ? '<div class="list">' + prods.map(function (p) { return productItem(p, b.name, false); }).join("") + "</div>"
+        ? '<div class="list">' + prods.map(function (p, i) { return productItem(p, b.name, false, i); }).join("") + "</div>"
         : '<div class="empty"><div class="big">🔍</div>Bu markada eşleşen ürün yok.</div>';
-
       appEl.innerHTML =
-        '<div class="topbar">' +
-          '<button class="back" id="back">‹ Tüm Markalar</button>' +
-          "<h2>" + esc(b.name) + "</h2>" +
+        '<div class="topbar"><button class="back" id="back">‹ Markalar</button></div>' +
+        '<div class="brand-hero">' +
+          '<div class="avatar" style="background:' + brandColors(b.name) + '">' + esc(initials(b.name)) + "</div>" +
+          "<div><h2>" + esc(b.name) + "</h2>" +
+          '<div class="sub">' + (b.products ? b.products.length : 0) + " ürün kodu</div></div>" +
         "</div>" +
-        '<div class="section-title">' + prods.length + " ürün</div>" +
+        '<div class="section-title">' + prods.length + (query ? " sonuç" : " ürün") + "</div>" +
         listHtml;
     }
 
@@ -315,21 +387,15 @@
       if (card) {
         currentBrand = card.getAttribute("data-brand");
         query = ""; searchEl.value = ""; clearEl.classList.remove("show");
-        window.scrollTo(0, 0);
-        render();
-        return;
+        metaEl.style.display = "none";
+        window.scrollTo({ top: 0 }); render(); return;
       }
       if (e.target.closest("#back")) {
-        currentBrand = null;
-        query = ""; searchEl.value = ""; clearEl.classList.remove("show");
-        window.scrollTo(0, 0);
-        render();
-        return;
+        currentBrand = null; query = ""; searchEl.value = ""; clearEl.classList.remove("show");
+        updateMeta(); window.scrollTo({ top: 0 }); render(); return;
       }
       var head = e.target.closest("[data-toggle]");
-      if (head) {
-        head.parentElement.classList.toggle("open");
-      }
+      if (head) head.closest(".item").classList.toggle("open");
     });
 
     searchEl.addEventListener("input", function () {
@@ -342,14 +408,20 @@
       searchEl.focus(); render();
     });
 
-    // ---- Panel giriş yönlendirmesi (Netlify Identity) ----
+    function updateMeta() {
+      if (currentBrand) { metaEl.style.display = "none"; return; }
+      var bc = DATA.brands.length;
+      var pc = DATA.brands.reduce(function (s, b) { return s + (b.products ? b.products.length : 0); }, 0);
+      if (bc) {
+        metaEl.innerHTML = "<b>" + bc + "</b>&nbsp;marka &nbsp;·&nbsp; <b>" + pc + "</b>&nbsp;ürün kodu";
+        metaEl.style.display = "inline-flex";
+      }
+    }
+
+    // Panel giriş yönlendirmesi (admin için, görünür buton yok)
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", function (user) {
-        if (!user) {
-          window.netlifyIdentity.on("login", function () {
-            document.location.href = "/admin/";
-          });
-        }
+        if (!user) window.netlifyIdentity.on("login", function () { document.location.href = "/admin/"; });
       });
     }
 
@@ -358,13 +430,13 @@
       .then(function (r) { return r.json(); })
       .then(function (d) {
         DATA = d && d.brands ? d : { brands: [] };
-        // Markaları alfabetik sırala
         DATA.brands.sort(function (a, b) { return a.name.localeCompare(b.name, "tr"); });
-        render();
+        updateMeta(); render();
       })
       .catch(function () {
         appEl.innerHTML = '<div class="empty"><div class="big">⚠️</div>Veriler yüklenemedi.<br>Lütfen sayfayı yenileyin.</div>';
       });
   </script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
 </body>
 </html>
