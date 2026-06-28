@@ -1,32 +1,42 @@
 {
   "brands": [
     {
-      "name": "Şerbetli",
+      "name": "Adalya",
       "products": [
         {
-          "code": "SRB-01",
-          "name": "Ice Watermelon",
+          "code": "ADL-01",
+          "name": "Love 66",
+          "contents": [
+            "kavun",
+            "karpuz",
+            "nane"
+          ]
+        },
+        {
+          "code": "ADL-02",
+          "name": "Lady Killer",
+          "contents": [
+            "böğürtlen",
+            "kavun",
+            "limon"
+          ]
+        },
+        {
+          "code": "ADL-03",
+          "name": "Hawaii",
+          "contents": [
+            "ananas",
+            "hindistan cevizi",
+            "misket limonu"
+          ]
+        },
+        {
+          "code": "ADL-04",
+          "name": "Buz Karpuz",
           "contents": [
             "karpuz",
             "nane",
             "buz"
-          ]
-        },
-        {
-          "code": "SRB-02",
-          "name": "İstanbul Nights",
-          "contents": [
-            "şeftali",
-            "kavun",
-            "çilek"
-          ]
-        },
-        {
-          "code": "SRB-03",
-          "name": "Sakızlı Limon",
-          "contents": [
-            "sakız",
-            "limon"
           ]
         }
       ]
@@ -60,21 +70,23 @@
       ]
     },
     {
-      "name": "Nakhla",
+      "name": "Fumari",
       "products": [
         {
-          "code": "NK-01",
-          "name": "Double Apple",
+          "code": "FM-01",
+          "name": "White Gummy Bear",
           "contents": [
-            "elma",
-            "anason"
+            "sakız",
+            "meyve karışımı"
           ]
         },
         {
-          "code": "NK-02",
-          "name": "Mizo Karpuz",
+          "code": "FM-02",
+          "name": "Ambrosia",
           "contents": [
-            "karpuz"
+            "karpuz",
+            "kavun",
+            "çarkıfelek"
           ]
         }
       ]
@@ -100,23 +112,52 @@
       ]
     },
     {
-      "name": "Fumari",
+      "name": "Nakhla",
       "products": [
         {
-          "code": "FM-01",
-          "name": "White Gummy Bear",
+          "code": "NK-01",
+          "name": "Double Apple",
           "contents": [
-            "sakız",
-            "meyve karışımı"
+            "elma",
+            "anason"
           ]
         },
         {
-          "code": "FM-02",
-          "name": "Ambrosia",
+          "code": "NK-02",
+          "name": "Mizo Karpuz",
+          "contents": [
+            "karpuz"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Şerbetli",
+      "products": [
+        {
+          "code": "SRB-01",
+          "name": "Ice Watermelon",
           "contents": [
             "karpuz",
+            "nane",
+            "buz"
+          ]
+        },
+        {
+          "code": "SRB-02",
+          "name": "İstanbul Nights",
+          "contents": [
+            "şeftali",
             "kavun",
-            "çarkıfelek"
+            "çilek"
+          ]
+        },
+        {
+          "code": "SRB-03",
+          "name": "Sakızlı Limon",
+          "contents": [
+            "sakız",
+            "limon"
           ]
         }
       ]

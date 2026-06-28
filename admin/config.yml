@@ -1,6 +1,7 @@
 # ============================================================
-#  Decap CMS yapılandırması — GitHub girişi (Git Gateway YOK)
-#  Giriş: /admin/ -> "Login with GitHub"
+#  Decap CMS — GitHub girişi (Git Gateway YOK)
+#  Giriş: /admin/  ->  "Login with GitHub"
+#  İki sekme: Markalar ve Ürünler. Ekleme/çıkarma tek tıkla.
 # ============================================================
 
 backend:
@@ -8,40 +9,51 @@ backend:
   repo: gordagm/nargile
   branch: main
 
-# Görsel/logo yüklersen buraya kaydedilir
 media_folder: "images"
 public_folder: "/images"
-
 locale: "tr"
 
 collections:
-  - name: "veri"
-    label: "Nargile Kodları"
-    files:
-      - name: "markalar"
-        label: "Markalar ve Kodlar"
-        file: "data.json"
-        format: json
-        description: "Markaları, ürün kodlarını ve içeriklerini buradan yönetin."
-        fields:
-          - label: "Markalar"
-            name: "brands"
-            label_singular: "Marka"
-            widget: "list"
-            summary: "{{fields.name}}"
-            fields:
-              - { label: "Marka Adı", name: "name", widget: "string", hint: "Örn: Adalya" }
-              - label: "Ürünler"
-                name: "products"
-                label_singular: "Ürün"
-                widget: "list"
-                summary: "{{fields.code}} — {{fields.name}}"
-                fields:
-                  - { label: "Kod", name: "code", widget: "string", hint: "Örn: ADL-01" }
-                  - { label: "Ürün Adı", name: "name", widget: "string", hint: "Örn: Love 66" }
-                  - label: "İçerikler"
-                    name: "contents"
-                    label_singular: "İçerik"
-                    widget: "list"
-                    hint: "Her satıra bir içerik yazın: kavun, karpuz, sakız…"
-                    field: { label: "İçerik", name: "icerik", widget: "string" }
+  # ---- MARKALAR ----
+  - name: "markalar"
+    label: "Markalar"
+    label_singular: "Marka"
+    description: "Marka eklemek/çıkarmak için. Ürün eklerken bu listeden marka seçilir."
+    folder: "content/markalar"
+    create: true
+    delete: true
+    format: json
+    identifier_field: "name"
+    slug: "{{fields.name}}"
+    summary: "{{fields.name}}"
+    fields:
+      - { label: "Marka Adı", name: "name", widget: "string", hint: "Örn: Adalya" }
+
+  # ---- ÜRÜNLER ----
+  - name: "urunler"
+    label: "Ürünler"
+    label_singular: "Ürün"
+    description: "Ürün kodu eklemek/çıkarmak için. Markayı listeden seç, kod ve içerikleri yaz."
+    folder: "content/urunler"
+    create: true
+    delete: true
+    format: json
+    slug: "{{fields.brand}}-{{fields.code}}"
+    summary: "{{fields.brand}}  ·  {{fields.code}}  —  {{fields.name}}"
+    sortable_fields: ["brand", "code", "name"]
+    fields:
+      - label: "Marka"
+        name: "brand"
+        widget: "relation"
+        collection: "markalar"
+        value_field: "name"
+        search_fields: ["name"]
+        display_fields: ["name"]
+        hint: "Listeden marka seç. (Marka yoksa önce 'Markalar' sekmesinden ekle.)"
+      - { label: "Kod", name: "code", widget: "string", hint: "Örn: ADL-01" }
+      - { label: "Ürün Adı", name: "name", widget: "string", hint: "Örn: Love 66" }
+      - label: "İçindekiler"
+        name: "contents"
+        widget: "list"
+        hint: "Her satıra bir içerik yaz: kavun, karpuz, sakız…"
+        field: { label: "İçerik", name: "icerik", widget: "string" }

@@ -1,3 +1,4 @@
-# Statik site — derleme (build) yok, klasör olduğu gibi yayınlanır.
+# Yayinda once content/ klasorlerini data.json'a birlestir.
 [build]
+  command = "node build.js"
   publish = "."
