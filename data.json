@@ -1,49 +1,124 @@
 {
   "brands": [
     {
-      "name": "Adalya",
-      "products": [
-        { "code": "ADL-01", "name": "Love 66", "contents": ["kavun", "karpuz", "nane"] },
-        { "code": "ADL-02", "name": "Lady Killer", "contents": ["böğürtlen", "kavun", "limon"] },
-        { "code": "ADL-03", "name": "Hawaii", "contents": ["ananas", "hindistan cevizi", "misket limonu"] },
-        { "code": "ADL-04", "name": "Buz Karpuz", "contents": ["karpuz", "nane", "buz"] }
-      ]
-    },
-    {
       "name": "Şerbetli",
       "products": [
-        { "code": "SRB-01", "name": "Ice Watermelon", "contents": ["karpuz", "nane", "buz"] },
-        { "code": "SRB-02", "name": "İstanbul Nights", "contents": ["şeftali", "kavun", "çilek"] },
-        { "code": "SRB-03", "name": "Sakızlı Limon", "contents": ["sakız", "limon"] }
+        {
+          "code": "SRB-01",
+          "name": "Ice Watermelon",
+          "contents": [
+            "karpuz",
+            "nane",
+            "buz"
+          ]
+        },
+        {
+          "code": "SRB-02",
+          "name": "İstanbul Nights",
+          "contents": [
+            "şeftali",
+            "kavun",
+            "çilek"
+          ]
+        },
+        {
+          "code": "SRB-03",
+          "name": "Sakızlı Limon",
+          "contents": [
+            "sakız",
+            "limon"
+          ]
+        }
       ]
     },
     {
       "name": "Al Fakher",
       "products": [
-        { "code": "AF-01", "name": "Çift Elma", "contents": ["elma", "anason"] },
-        { "code": "AF-02", "name": "Nane", "contents": ["nane"] },
-        { "code": "AF-03", "name": "Üzüm Nane", "contents": ["üzüm", "nane"] }
+        {
+          "code": "AF-01",
+          "name": "Çift Elma",
+          "contents": [
+            "elma",
+            "anason"
+          ]
+        },
+        {
+          "code": "AF-02",
+          "name": "Nane",
+          "contents": [
+            "nane"
+          ]
+        },
+        {
+          "code": "AF-03",
+          "name": "Üzüm Nane",
+          "contents": [
+            "üzüm",
+            "nane"
+          ]
+        }
       ]
     },
     {
       "name": "Nakhla",
       "products": [
-        { "code": "NK-01", "name": "Double Apple", "contents": ["elma", "anason"] },
-        { "code": "NK-02", "name": "Mizo Karpuz", "contents": ["karpuz"] }
+        {
+          "code": "NK-01",
+          "name": "Double Apple",
+          "contents": [
+            "elma",
+            "anason"
+          ]
+        },
+        {
+          "code": "NK-02",
+          "name": "Mizo Karpuz",
+          "contents": [
+            "karpuz"
+          ]
+        }
       ]
     },
     {
       "name": "Mazaya",
       "products": [
-        { "code": "MZ-01", "name": "Sakızlı Çilek", "contents": ["sakız", "çilek"] },
-        { "code": "MZ-02", "name": "Kavun", "contents": ["kavun"] }
+        {
+          "code": "MZ-01",
+          "name": "Sakızlı Çilek",
+          "contents": [
+            "sakız",
+            "çilek"
+          ]
+        },
+        {
+          "code": "MZ-02",
+          "name": "Kavun",
+          "contents": [
+            "kavun"
+          ]
+        }
       ]
     },
     {
       "name": "Fumari",
       "products": [
-        { "code": "FM-01", "name": "White Gummy Bear", "contents": ["sakız", "meyve karışımı"] },
-        { "code": "FM-02", "name": "Ambrosia", "contents": ["karpuz", "kavun", "çarkıfelek"] }
+        {
+          "code": "FM-01",
+          "name": "White Gummy Bear",
+          "contents": [
+            "sakız",
+            "meyve karışımı"
+          ]
+        },
+        {
+          "code": "FM-02",
+          "name": "Ambrosia",
+          "contents": [
+            "karpuz",
+            "kavun",
+            "çarkıfelek"
+          ]
+        }
       ]
     }
   ]
