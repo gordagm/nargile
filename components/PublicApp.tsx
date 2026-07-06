@@ -99,6 +99,16 @@ export default function PublicApp({ brands }: { brands: Brand[] }) {
               <Highlight text={row.brand} query={query} />
             </span>
           )}
+          {row.product.contents.length > 0 && (
+            <span className="pcontents">
+              {row.product.contents.map((c, idx) => (
+                <span key={idx}>
+                  {idx > 0 ? " · " : ""}
+                  <Highlight text={c} query={query} />
+                </span>
+              ))}
+            </span>
+          )}
         </span>
         <span className="arrow">›</span>
       </button>
